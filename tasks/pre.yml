@@ -27,3 +27,9 @@
   - Set User's initial password   # This will only run on change, ideally once.
   - Copy root ssh keys to user
   - Debug print new user
+
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+  become: true
+  notify: Reboot

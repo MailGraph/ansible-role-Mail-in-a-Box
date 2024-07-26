@@ -4,3 +4,5 @@ full_upgrade: false
 
 new_user: me
 new_user_password: changeme
+
+hostname: box.mysite.test

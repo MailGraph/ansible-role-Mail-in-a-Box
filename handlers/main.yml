@@ -19,3 +19,8 @@
 - name: Debug print new user
   debug:
     msg: "Your new user is: '{{ new_user }}'"
+
+- name: Reboot
+  ansible.builtin.reboot:
+    reboot_timeout: 600
+  become: true
