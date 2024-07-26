@@ -11,7 +11,11 @@
 - name: add setup command to History
   ansible.builtin.lineinfile:
     path: "/home/{{ new_user }}/.bash_history"
+    create: true
     regexp: '^{{ item }}'
     line: "{{ item }}"
+    group: "{{ new_user }}"
+    owner: "{{ new_user }}"
+  become: true
   loop:
   - "{{ setup_oneliner }}"
