@@ -1,0 +1,6 @@
+---
+update_only: true
+full_upgrade: false
+
+new_user: me
+new_user_password: changeme

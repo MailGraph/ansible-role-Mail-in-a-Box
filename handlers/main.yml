@@ -1,0 +1,21 @@
+---
+# handlers file for try
+
+- name: Set User's initial password
+  ansible.builtin.user:
+    name: "{{ new_user }}"
+    password: "{{ new_user_password | password_hash('sha512') }}"
+  become: true
+
+- name: Copy root ssh keys to user
+  ansible.builtin.copy:
+    src: /root/.ssh
+    dest: "/home/{{ new_user }}/"
+    remote_src: yes
+    owner: "{{ new_user }}"
+    group: "{{ new_user }}"
+  become: true
+
+- name: Debug print new user
+  debug:
+    msg: "Your new user is: '{{ new_user }}'"

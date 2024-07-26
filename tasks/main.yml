@@ -1,0 +1,17 @@
+---
+- name: Prereqs
+  ansible.builtin.include_tasks:
+    file: pre.yml
+
+# Setup
+# home: https://mailinabox.email/guide.html
+# video: https://youtu.be/bzxNb_fcqnA
+
+
+- name: add setup command to History
+  ansible.builtin.lineinfile:
+    path: "/home/{{ new_user }}/.bash_history"
+    regexp: '^{{ item }}'
+    line: "{{ item }}"
+  loop:
+  - "{{ setup_oneliner }}"

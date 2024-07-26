@@ -1,0 +1,29 @@
+---
+
+- name: Update all packages
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+  become: true
+  when: update_only
+
+- name: Update & Upgrade
+  ansible.builtin.apt:
+    update_cache: yes
+    state: latest
+    upgrade: yes
+  become: true
+  when: full_upgrade and not update_only
+
+- name: Add new user
+  ansible.builtin.user:
+    name: "{{ new_user }}"
+    create_home: yes
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+  become: true
+  notify:
+  - Set User's initial password   # This will only run on change, ideally once.
+  - Copy root ssh keys to user
+  - Debug print new user
