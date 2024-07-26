@@ -1,0 +1,15 @@
+Vagrant.configure("2") do |config|
+#  config.vm.box = "generic/ubuntu2204"
+
+  config.vm.define :ubuntults do |ubuntults|
+    ubuntults.vm.box = "generic/ubuntu2204"
+    ubuntults.vm.provider :libvirt do |domain|
+      domain.memory = 2048
+      domain.cpus = 4
+      domain.nested = true
+    end
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible/uni.yml"
+    end
+  end
+end

@@ -1,0 +1,6 @@
+- hosts: ubuntults
+  vars:
+    devel: true
+  roles:
+    - ansible-role-Mail-in-a-Box
+
